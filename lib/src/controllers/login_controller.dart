@@ -5,13 +5,13 @@ class LoginController extends ChangeNotifier {
   late UserModel _user;
 
   LoginController() {
-    _user = UserModel(username: '', password: '');
+    _user = UserModel(email: '', password: '');
   }
 
   UserModel get user => _user;
 
   void updateUsername(String value) {
-    _user.username = value;
+    _user.email = value;
     notifyListeners();
   }
 
@@ -23,6 +23,9 @@ class LoginController extends ChangeNotifier {
   void loginUser() {
     // Implement your login logic here
     // For simplicity, let's just print the user credentials
-    print('Username: ${_user.username}, Password: ${_user.password}');
+    // ignore: avoid_print
+    print('Username: ${_user.email}, Password: ${_user.password}');
   }
+
+  void updateAcceptTerms(bool bool) {}
 }

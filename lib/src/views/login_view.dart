@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 import '../controllers/login_controller.dart';
+import 'register_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -18,7 +19,10 @@ class LoginView extends StatelessWidget {
           centerTitle: true,
           title: const Text('login'),
         ),
-        body: const LoginBody(),
+        body: 
+        const SingleChildScrollView(
+        child: LoginBody()
+        )
       ),
     );
   }
@@ -33,7 +37,7 @@ class LoginBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-        Image.asset('assets/images/green_glimpse_logo.png'),
+          Image.asset('assets/images/green_glimpse_logo.png'),
           TextField(
             onChanged: (value) =>
                 context.read<LoginController>().updateUsername(value),
@@ -52,20 +56,37 @@ class LoginBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(minimumSize: const Size(140, 40)),
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(140, 40)),
                   onPressed: () => context.read<LoginController>().loginUser(),
-                  child: const Text('login', style: TextStyle(letterSpacing: 0.2, fontSize: 16, )),
+                  child: const Text('login',
+                      style: TextStyle(
+                        letterSpacing: 0.2,
+                        fontSize: 16,
+                      )),
                 ),
                 const SizedBox(height: 6),
                 const Text("not registered yet?", textAlign: TextAlign.center),
                 const SizedBox(height: 1),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(minimumSize: const Size(140, 40)),
-                  onPressed: () {},
-                  child: const Text('register', style: TextStyle(letterSpacing: 0.2, fontSize: 16, )),
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(140, 40)),
+                  onPressed: () {
+                    // Navigate to RegisterView
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const RegisterView()),
+                    );
+                  },
+                  child: const Text('register',
+                      style: TextStyle(
+                        letterSpacing: 0.2,
+                        fontSize: 16,
+                      )),
                 ),
                 const SizedBox(height: 200),
-                const Text("powered by greenglimpse", style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey)),
+                const Text("powered by greenglimpse",
+                    style: TextStyle(
+                        fontStyle: FontStyle.italic, color: Colors.grey)),
               ])),
         ],
       ),
