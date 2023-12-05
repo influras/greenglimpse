@@ -19,7 +19,7 @@ class LoginView extends StatelessWidget {
           centerTitle: true,
           title: const Text('login'),
         ),
-        body: 
+        body:  
         const SingleChildScrollView(
         child: LoginBody()
         )
