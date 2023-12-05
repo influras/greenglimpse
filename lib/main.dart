@@ -8,8 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Reels> reels = ReelController().getReels();
-    print(reels);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'greenglimpse',
