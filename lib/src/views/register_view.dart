@@ -88,7 +88,7 @@ class RegisterBody extends StatelessWidget {
                   children: [
                 Row(
                   children: [
-                    const Text('confirm the terms and condtitions'),
+                    const Text('accept the terms and condtitions'),
                     Checkbox(
                       value: context.watch<RegisterController>().acceptTerms,
                       onChanged: (value) {

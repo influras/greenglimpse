@@ -14,7 +14,7 @@ class RegisterController extends ChangeNotifier {
 
   RegisterController() {
     _customer =
-        CustomerModel(firstName: '', lastName: '', email: '', password: '');
+        CustomerModel(firstName: '', lastName: '', email: '', password: '', country: '', city: '', postcode: '', street: '');
   }
 /*
  * This method returns the padding for the RegisterView body Column

@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:greenglimpse/src/models/reel_model.dart';
-import 'src/controllers/reel_controller.dart';
-import 'src/views/reels_view.dart';
+import 'package:greenglimpse/src/views/home_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     List<Reels> reels = ReelController().getReels();
     print(reels);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter MVC Login',
+      title: 'greenglimpse',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const ReelsView(),
+      home: HomeView(),
     );
   }
 }
