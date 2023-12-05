@@ -3,17 +3,7 @@
         {
             "creator": "Name of the Creator",
             "description": "Description Product",
-            "mediaUrl": "https://www.youtube.com/shorts/S6xRAp7z1Gk"
-        },
-        {
-            "creator": "Name of the Creator",
-            "description": "Description Product",
-            "mediaUrl": "https://www.youtube.com/shorts/ci-e_fvl-Vg"
-        },
-        {
-            "creator": "Name of the Creator",
-            "description": "Description Product",
-            "mediaUrl": "https://www.youtube.com/shorts/Xcmqe6Jb-pU"
+            "mediaUrl": "http://techslides.com/demos/sample-videos/small.mp4"
         }
     ]
 }

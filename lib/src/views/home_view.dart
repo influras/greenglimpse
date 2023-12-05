@@ -1,7 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:greenglimpse/src/views/login_view.dart';
+import 'package:greenglimpse/src/views/reels_view.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -20,9 +19,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        title: const Text('greenglimpse', style: TextStyle(fontFamily: 'Mouldy')),
+        title:
+            const Text('greenglimpse', style: TextStyle(fontFamily: 'Mouldy')),
       ),
       body: _tabs[_currentIndex],
       bottomNavigationBar: _shouldShowBottomNavBar()
@@ -55,7 +54,8 @@ class _HomeViewState extends State<HomeView> {
   // Function to determine whether to show the bottom navigation bar
   bool _shouldShowBottomNavBar() {
     // You can customize this logic based on your requirements
-    return ModalRoute.of(context)?.settings.name != '/login'; // Example: Don't show on the login screen
+    return ModalRoute.of(context)?.settings.name !=
+        '/login'; // Example: Don't show on the login screen
   }
 }
 
@@ -63,7 +63,7 @@ class ReelsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Reels Tab Content'),
+      child: ReelsView(),
     );
   }
 }

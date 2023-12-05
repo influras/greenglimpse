@@ -69,6 +69,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets\images\green_glimpse_logo.png
+    - assets\sample.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

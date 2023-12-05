@@ -16,7 +16,7 @@ class ReelsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Reels> reels = ReelController().getReels();
+    List<Reels> reels = ReelController().getReelsData();
     return SafeArea(
       child: (reels.isNotEmpty)
           ? Scaffold(

@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 class ReelsModel {
+  ReelsModel reelsModelFromJson(String str) =>
+      ReelsModel.fromJson(json.decode(str));
+
+  String reelsModelToJson(ReelsModel data) => json.encode(data.toJson());
   List<Reels>? reels;
 
   ReelsModel({this.reels});

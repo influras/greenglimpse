@@ -61,9 +61,7 @@ class RegisterBody extends StatelessWidget {
             obscureText: true,
             decoration: InputDecoration(
               labelText: 'password',
-              errorText: context
-                      .read<RegisterController>()
-                      .passwordsMatch()
+              errorText: context.read<RegisterController>().passwordsMatch()
                   ? null
                   : 'Passwords do not match',
             ),
@@ -74,9 +72,7 @@ class RegisterBody extends StatelessWidget {
                 context.read<RegisterController>().updateRepeatPassword(value),
             decoration: InputDecoration(
               labelText: 'repeat password',
-              errorText: context
-                      .read<RegisterController>()
-                      .passwordsMatch()
+              errorText: context.read<RegisterController>().passwordsMatch()
                   ? null
                   : 'Passwords do not match',
             ),
@@ -88,13 +84,14 @@ class RegisterBody extends StatelessWidget {
                   children: [
                 Row(
                   children: [
-                    const Text('accept the terms and condtitions'),
+                    const Text('confirm the terms and condtitions'),
                     Checkbox(
                       value: context.watch<RegisterController>().acceptTerms,
                       onChanged: (value) {
                         // Update the state of the checkbox
                         context
-                            .read<RegisterController>().updateAcceptTerms(value ?? false);
+                            .read<RegisterController>()
+                            .updateAcceptTerms(value ?? false);
                       },
                     ),
                   ],

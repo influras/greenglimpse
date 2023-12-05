@@ -1,32 +1,39 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../models/reel_model.dart';
+import 'package:flutter/services.dart' as root_bundle;
 
 class ReelController extends ChangeNotifier {
-  List<Reels> reelsList = [];
-  Future<ReelsModel> getReelsData() async {
-    final response = await rootBundle.loadString('assets/sample.json');
-    final responseData = await json.decode(response);
+  List<Reels> getReelsData() {
+    final response =
+        ReadJsonFile.readJsonData(path: "assets/sample.json").then((value) {});
+    final responseData = json.decode(response.toString());
     List<Reels> list = [];
-    if (response.isNotEmpty) {
+    if (responseData.isNotEmpty) {
       for (int index = 0; index < 5; index++) {
-        list.add(Reels.fromJson(responseData));
+        list.add(ReelsModel.fromJson(responseData).reels as Reels);
+        print(list);
       }
     } else {
       throw Exception('Failed to load');
     }
-    reelsList = list;
-    return ReelsModel.fromJson(responseData);
+
+    return list;
   }
+}
 
-  List<Reels> getReels() {
-    getReelsData();
-    List<Reels> reList = reelsList;
-    print(reList);
-    print(reelsList);
+class ReadJsonFile {
+  static Future<Map> readJsonData({required String path}) async {
+    // read json file
+    final jsondata = await root_bundle.rootBundle.loadString(path);
 
-    return reList;
+    // decode json data as list
+    final list = json.decode(jsondata) as Map<String, dynamic>;
+
+    // map json and initialize
+    // using DataModel
+    return list;
   }
 }
