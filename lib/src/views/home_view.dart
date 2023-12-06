@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:greenglimpse/src/views/login_view.dart';
 
 class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
   @override
   _HomeViewState createState() => _HomeViewState();
 }
@@ -12,9 +14,9 @@ class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
 
   final List<Widget> _tabs = [
-    ReelsTab(),
-    MarketTab(),
-    MeTab(),
+    const ReelsTab(),
+    const MarketTab(),
+    const MeTab(),
   ];
 
   @override
@@ -60,18 +62,22 @@ class _HomeViewState extends State<HomeView> {
 }
 
 class ReelsTab extends StatelessWidget {
+  const ReelsTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Reels Tab Content'),
     );
   }
 }
 
 class MarketTab extends StatelessWidget {
+  const MarketTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Market Tab Content'),
     );
   }

@@ -7,26 +7,6 @@ class CustomerModel extends UserModel {
   late final String _city;
   late final String _postcode;
   late final String _street;
-  get country => _country;
-
- set country(value) => _country = value;
-
-  get city => _city;
-
-  set city( value) => _city = value;
-
-  get postcode => _postcode;
-
-  set postcode( value) => _postcode = value;
-
-  get street => _street;
-
-  set street( value) => _street = value;
-
-  get firstName => _firstName;
-  set firstName(value) => _firstName = value;
-  get lastName => _lastName;
-  set lastName(value) => _lastName = value;
 
   CustomerModel({
     required firstName,
@@ -44,19 +24,28 @@ class CustomerModel extends UserModel {
         _postcode = postcode,
         _street = street;
 
-  @override
-  String toString() =>
-      'CutomerModel(_firstName: $_firstName, _lastName: $_lastName)';
+  get country => _country;
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  set country(value) => _country = value;
 
-    return other is CustomerModel &&
-        other._firstName == _firstName &&
-        other._lastName == _lastName;
-  }
+  get city => _city;
 
-  @override
-  int get hashCode => _firstName.hashCode ^ _lastName.hashCode;
+  set city(value) => _city = value;
+
+  get postcode => _postcode;
+
+  set postcode(value) => _postcode = value;
+
+  get street => _street;
+
+  set street(value) => _street = value;
+
+  get firstName => _firstName;
+
+  set firstName(value) => _firstName = value;
+
+  get lastName => _lastName;
+
+  set lastName(value) => _lastName = value;
+  
 }

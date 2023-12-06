@@ -9,12 +9,21 @@ class RegisterController extends ChangeNotifier {
   late CustomerModel _customer;
 
   String _repeatPassword = '';
+
+  String _selectedCountry = '';
+
   bool _acceptTerms = false;
-  
 
   RegisterController() {
-    _customer =
-        CustomerModel(firstName: '', lastName: '', email: '', password: '', country: '', city: '', postcode: '', street: '');
+    _customer = CustomerModel(
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        country: '',
+        city: '',
+        postcode: '',
+        street: '');
   }
 /*
  * This method returns the padding for the RegisterView body Column
@@ -32,25 +41,45 @@ class RegisterController extends ChangeNotifier {
   }
 
   void updateLastName(String value) {
-    _customer.lastName = value; 
+    _customer.lastName = value;
   }
 
   void updateEmail(String value) {
-    _customer.email = value; 
+    _customer.email = value;
     notifyListeners();
   }
 
   void updatePassword(String value) {
-    _customer.password = value; 
+    _customer.password = value;
     notifyListeners();
   }
 
-   bool passwordsMatch() {
+  bool passwordsMatch() {
     return _customer.password == _repeatPassword;
   }
 
-   void updateRepeatPassword(String value) {
+  void updateRepeatPassword(String value) {
     _repeatPassword = value;
+    notifyListeners();
+  }
+
+  void updateCountry(String value) {
+    _customer.country = value;
+    notifyListeners();
+  }
+
+  void updateCity(String value) {
+    _customer.city = value;
+    notifyListeners();
+  }
+
+  void updatePostcode(String value) {
+    _customer.postcode = value;
+    notifyListeners();
+  }
+
+  void updateStreet(String value) {
+    _customer.street = value;
     notifyListeners();
   }
 
@@ -59,5 +88,12 @@ class RegisterController extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get acceptTerms => _acceptTerms; 
+  bool get acceptTerms => _acceptTerms;
+
+  void updateSelectedCountry(String country) {
+    _selectedCountry = country;
+    notifyListeners();
+  }
+
+  String get selectedCountry => _selectedCountry;
 }
