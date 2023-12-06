@@ -1,43 +1,24 @@
 // ignore_for_file: must_be_immutable
 
 import '../controllers/reel_controller.dart';
-import 'package:greenglimpse/src/models/reel_creator_model.dart';
+import 'package:greenglimpse/src/models/reel_model.dart';
 //import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:greenglimpse/src/widgets/shorts_player_widget.dart';
 
-class ReelsMainView extends StatefulWidget {
-  final List<Reel> postDetails;
+class ReelsView extends StatelessWidget {
+  const ReelsView({Key? key}) : super(key: key);
 
-  const ReelsMainView({Key? key, required this.postDetails}) : super(key: key);
-
-  @override
-  State<ReelsMainView> createState() => _ReelsMainViewState();
-}
-
-class _ReelsMainViewState extends State<ReelsMainView> {
-  @override
-  void initState() {
-    super.initState();
-    ReelController().getShortsData();
-  }
-
-  Color likeBtnColor = Colors.white,
-      dislikeBtnColor = Colors.white,
-      subscribeBtnColor = Colors.red;
-  double iconSize = 33;
-  TextStyle textStyle1 = const TextStyle(
-    color: Colors.white,
-    fontSize: 15,
-  );
-  bool likeBtnSwitch = false, dislikeBtnSwitch = false, subscribeSwitch = false;
-  String subscribeText = 'Subscribe';
+  get streamTransformer => null;
+  //@override
+  //State<ReelsView> createState() => _ReelsViewState();
 
   @override
   Widget build(BuildContext context) {
+    List<Reels> reels = ReelController().getReelsData();
     return SafeArea(
-      child: (widget.postDetails.isNotEmpty)
+      child: (reels.isNotEmpty)
           ? Scaffold(
               body: PageView.builder(
                 //to make the whole page scrollable
@@ -49,7 +30,7 @@ class _ReelsMainViewState extends State<ReelsMainView> {
                     //to put all other elements on top of the video
                     children: [
                       ShortsPlayer(
-                        shortsUrl: widget.postDetails[index].mediaUrl,
+                        shortsUrl: reels[index].mediaUrl.toString(),
                       ),
 
                       //all stacked options
@@ -108,8 +89,7 @@ class _ReelsMainViewState extends State<ReelsMainView> {
                                     Padding(
                                       padding: const EdgeInsets.all(8),
                                       child: Text(
-                                        widget.postDetails[index].title
-                                            .toString(),
+                                        reels[index].creator.toString(),
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,

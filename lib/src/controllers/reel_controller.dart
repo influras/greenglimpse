@@ -1,32 +1,39 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../models/reel_creator_model.dart';
+import '../models/reel_model.dart';
+import 'package:flutter/services.dart' as root_bundle;
 
 class ReelController extends ChangeNotifier {
-  List<String> thumbnailUrlList = [];
-  Future<ReelsModel> getShortsData() async {
-    final response = await rootBundle.loadString('assets/sample.json');
-    final responseData = await json.decode(response);
-
-    //final response = await http.get(
-    //  Uri.parse('https://internship-service.onrender.com/videos?page=2'));
-    //var responseData = jsonDecode(response.body.toString());
-
-    List<String> tempList = [];
-    if (response.isNotEmpty) {
+  List<Reels> getReelsData() {
+    final response =
+        ReadJsonFile.readJsonData(path: "assets/sample.json").then((value) {});
+    final responseData = json.decode(response.toString());
+    List<Reels> list = [];
+    if (responseData.isNotEmpty) {
       for (int index = 0; index < 5; index++) {
-        tempList.add(ReelsModel.fromJson(responseData)
-            .data
-            .posts[index]
-            .submission
-            .toString());
+        list.add(ReelsModel.fromJson(responseData).reels as Reels);
+        print(list);
       }
     } else {
       throw Exception('Failed to load');
     }
-    thumbnailUrlList = tempList;
-    return ReelsModel.fromJson(responseData);
+
+    return list;
+  }
+}
+
+class ReadJsonFile {
+  static Future<Map> readJsonData({required String path}) async {
+    // read json file
+    final jsondata = await root_bundle.rootBundle.loadString(path);
+
+    // decode json data as list
+    final list = json.decode(jsondata) as Map<String, dynamic>;
+
+    // map json and initialize
+    // using DataModel
+    return list;
   }
 }

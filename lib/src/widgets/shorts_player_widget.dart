@@ -16,11 +16,12 @@ class _ShortsPlayerState extends State<ShortsPlayer> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoPlayerController = VideoPlayerController.network(widget.shortsUrl)
-      ..initialize().then((value) {
-        videoPlayerController.play();
-        videoPlayerController.setVolume(1);
-      });
+    videoPlayerController =
+        VideoPlayerController.network(widget.shortsUrl.toString())
+          ..initialize().then((value) {
+            videoPlayerController.play();
+            videoPlayerController.setVolume(1);
+          });
   }
 
   @override
@@ -57,7 +58,7 @@ class _ShortsPlayerState extends State<ShortsPlayer> {
       child: Container(
         height: size.height,
         width: size.width,
-        color: Colors.greenAccent,
+        color: const Color.fromARGB(255, 240, 105, 105),
         child: Stack(alignment: Alignment.topRight, children: [
           VideoPlayer(videoPlayerController),
           Padding(
