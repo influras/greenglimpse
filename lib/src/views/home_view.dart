@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:greenglimpse/src/views/login_view.dart';
+import 'package:greenglimpse/src/views/market_view.dart';
 import 'package:greenglimpse/src/views/reels_view.dart';
+import 'package:greenglimpse/src/views/shoppingcart_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeViewState createState() => _HomeViewState();
 }
 
@@ -22,8 +25,24 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text('greenglimpse', style: TextStyle(fontFamily: 'Mouldy')),
+
+        leading: Align( alignment: Alignment.centerLeft, child: Image.asset('assets/images/glimpse_logo_blatt_weiß.png')),
+
+        title: const Center(child: Text('greenglimpse', style: TextStyle(fontFamily: 'Mouldy'))) ,
+        actions: [
+           
+          // Add a shopping cart icon
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Navigate to the shopping cart view
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ShoppingCartView()),
+              );
+            },
+          ),
+        ],
       ),
       body: _tabs[_currentIndex],
       bottomNavigationBar: _shouldShowBottomNavBar()
@@ -40,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
                   label: 'Reels',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(Icons.discount),
                   label: 'Market',
                 ),
                 BottomNavigationBarItem(
@@ -66,7 +85,7 @@ class ReelsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: ReelsView(),
     );
   }
@@ -78,7 +97,7 @@ class MarketTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Market Tab Content'),
+      child: MarketView(),
     );
   }
 }

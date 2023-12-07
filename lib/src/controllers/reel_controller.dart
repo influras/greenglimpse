@@ -6,15 +6,16 @@ import '../models/reel_model.dart';
 import 'package:flutter/services.dart' as root_bundle;
 
 class ReelController extends ChangeNotifier {
-  List<Reels> getReelsData() {
+  Future<List<Reels>> getReelsData() async {
     final response =
-        ReadJsonFile.readJsonData(path: "assets/sample.json").then((value) {});
-    final responseData = json.decode(response.toString());
+        await ReadJsonFile.readJsonData(path: "assets/sample.json");
+    final responseData = response['reels'] as List<dynamic>;
+
     List<Reels> list = [];
+
     if (responseData.isNotEmpty) {
-      for (int index = 0; index < 5; index++) {
-        list.add(ReelsModel.fromJson(responseData).reels as Reels);
-        print(list);
+      for (int index = 0; index < responseData.length; index++) {
+        list.add(Reels.fromJson(responseData[index]));
       }
     } else {
       throw Exception('Failed to load');

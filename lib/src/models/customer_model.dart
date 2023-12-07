@@ -8,6 +8,9 @@ class CustomerModel extends UserModel {
   late final String _postcode;
   late final String _street;
 
+/*
+country, city, postcode, and street could be a mixin
+*/
   CustomerModel({
     required firstName,
     required lastName,

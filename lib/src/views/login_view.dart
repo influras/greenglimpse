@@ -10,17 +10,9 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => LoginController(),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          centerTitle: true,
-          title: const Text('login'),
-        ),
+      child: const Scaffold(
         body:  
-        const SingleChildScrollView(
+        SingleChildScrollView(
         child: LoginBody()
         )
       ),

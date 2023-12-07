@@ -10,7 +10,9 @@ class RegisterController extends ChangeNotifier {
 
   String _repeatPassword = '';
 
-  String _selectedCountry = '';
+  String? _selectedCountry;
+
+  String? get selectedCountry => _selectedCountry;
 
   bool _acceptTerms = false;
 
@@ -90,10 +92,9 @@ class RegisterController extends ChangeNotifier {
 
   bool get acceptTerms => _acceptTerms;
 
-  void updateSelectedCountry(String country) {
-    _selectedCountry = country;
+  void updateSelectedCountry(String value) {
+    _selectedCountry = value;
     notifyListeners();
   }
 
-  String get selectedCountry => _selectedCountry;
 }

@@ -79,15 +79,16 @@ class RegisterBody extends StatelessWidget {
                 context.read<RegisterController>().updateLastName(value),
             decoration: const InputDecoration(labelText: 'last name '),
           ),
-
-          DropdownButton<String>(
+          Align( alignment: Alignment.centerLeft, 
+            child: DropdownButton<String>(
             value: context.watch<RegisterController>().selectedCountry,
             onChanged: (value) {
               context.read<RegisterController>().updateSelectedCountry(value!);
             },
             items: CountryUtil.getAllCountries(),
             hint: const Text('Select a country'),
-          ),
+            
+          )),
           TextField(
             onChanged: (value) =>
                 context.read<RegisterController>().updateCity(value),

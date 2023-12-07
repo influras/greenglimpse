@@ -188,7 +188,6 @@
 //
 //     final shortsModel = shortsModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ShortsModel shortsModelFromJson(String str) =>
