@@ -33,7 +33,6 @@ class RegisterBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get the screen width
-    String? selectedCountry = '';
     // Calculate padding based on screen width
     return Padding(
       padding: EdgeInsets.symmetric(

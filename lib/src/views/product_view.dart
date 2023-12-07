@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:greenglimpse/src/controllers/product_controller.dart';
+import 'package:greenglimpse/src/controllers/shoppingcart_controller.dart';
 import 'package:greenglimpse/src/models/product_model.dart';
+// ignore: depend_on_referenced_packages
+import 'package:provider/provider.dart';
 
 class ProductView extends StatelessWidget {
   final ProductModel product;
@@ -39,6 +42,14 @@ class ProductView extends StatelessWidget {
               'Price: ${ProductController().toCurrencyFormat(product.price)}',
               style: const TextStyle(fontSize: 16),
             ),
+            const SizedBox(height: 5),
+            ElevatedButton(
+                            onPressed: () {
+                              // Add the product to the shopping cart
+                              Provider.of<ShoppingCartController>(context, listen: false).addToCart(product);
+                            },
+                            child: const Text('add to cart'),
+                          ),
           ],
         ),
       ),

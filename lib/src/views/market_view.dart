@@ -87,7 +87,7 @@ class _MarketViewState extends State<MarketView> {
                               // Add the product to the shopping cart
                               Provider.of<ShoppingCartController>(context, listen: false).addToCart(product);
                             },
-                            child: const Text('Add to Cart'),
+                            child: const Text('add to cart'),
                           ),
                         ],
                       ),
