@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:greenglimpse/src/controllers/market_controller.dart';
 import 'package:greenglimpse/src/controllers/product_controller.dart';
+import 'package:greenglimpse/src/controllers/shoppingcart_controller.dart';
 import 'package:greenglimpse/src/models/product_model.dart';
 import 'package:greenglimpse/src/views/product_view.dart';
+// ignore: depend_on_referenced_packages
+import 'package:provider/provider.dart';
+
 
 class MarketView extends StatefulWidget {
   const MarketView({Key? key}) : super(key: key);
@@ -14,6 +18,7 @@ class MarketView extends StatefulWidget {
 class _MarketViewState extends State<MarketView> {
   List<ProductModel> products = MarketController().getStubProducts();
   List<ProductModel> filteredProducts = [];
+  List<ProductModel> shoppingCart = [];
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +53,13 @@ class _MarketViewState extends State<MarketView> {
               itemCount: filteredProducts.isEmpty ? products.length : filteredProducts.length,
               itemBuilder: (context, index) {
                 ProductModel product = filteredProducts.isEmpty ? products[index] : filteredProducts[index];
-
                 return GestureDetector(
                   onTap: () {
                     // Handle tapping on the product to navigate to the product description
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ProductView(product: product)));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0), // Adjust the padding as needed
+                 child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Card(
                       elevation: 2.0,
                       child: Column(
@@ -77,6 +81,14 @@ class _MarketViewState extends State<MarketView> {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(ProductController().toCurrencyFormat(product.price)),
                           ),
+                          // Add a button to add the product to the cart
+                          ElevatedButton(
+                            onPressed: () {
+                              // Add the product to the shopping cart
+                              Provider.of<ShoppingCartController>(context, listen: false).addToCart(product);
+                            },
+                            child: const Text('Add to Cart'),
+                          ),
                         ],
                       ),
                     ),
@@ -85,6 +97,41 @@ class _MarketViewState extends State<MarketView> {
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  // Function to add a product to the shopping cart
+  void addToCart(ProductModel product) {
+    setState(() {
+      shoppingCart.add(product);
+    });
+  }
+
+  // Function to build the shopping cart widget
+  Widget buildShoppingCart() {
+    return Container(
+      margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            'Shopping Cart',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8.0),
+          // Display the products in the shopping cart
+          for (ProductModel product in shoppingCart)
+            ListTile(
+              title: Text(product.name),
+              subtitle: Text(ProductController().toCurrencyFormat(product.price)),
+            ),
         ],
       ),
     );

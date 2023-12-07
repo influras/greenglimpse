@@ -2,8 +2,11 @@ import 'dart:math';
 
 import 'package:greenglimpse/src/models/product_certificate.dart';
 import 'package:greenglimpse/src/models/product_model.dart';
+import 'package:flutter/material.dart';
 
-class MarketController {
+
+class MarketController extends ChangeNotifier {
+  
   List<ProductModel> getStubProducts() {
     List<ProductCertificate> certificates = [];
 
@@ -19,7 +22,7 @@ class MarketController {
     Set<ProductCertificate> productSet = certificates.toSet();
 
     List<ProductModel> products = [];
-    
+
     for (var i = 0; i < 10; i++) {
       products.add(ProductModel(
           name: "Product $i",
@@ -38,4 +41,5 @@ class MarketController {
 
     return products;
   }
+  
 }

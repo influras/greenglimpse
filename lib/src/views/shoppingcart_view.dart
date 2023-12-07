@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:greenglimpse/src/controllers/product_controller.dart';
 import 'package:greenglimpse/src/controllers/shoppingcart_controller.dart';
-import 'package:greenglimpse/src/models/product_model.dart'; // Import your ProductModel
+import 'package:greenglimpse/src/models/product_model.dart';
+// ignore: depend_on_referenced_packages
+import 'package:provider/provider.dart';
 
 class ShoppingCartView extends StatelessWidget {
   const ShoppingCartView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<ProductModel> cartItems = ShoppingCartController().cartItems;
+    List<ProductModel> cartItems = Provider.of<ShoppingCartController>(context).selectedItems;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,18 +29,12 @@ class ShoppingCartView extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             title: Text(product.name),
-            subtitle: Text('Price: ${ShoppingCartController().toCurrencyFormat(product.price)}'),
+            subtitle: Text('Price: ${ProductController().toCurrencyFormat(product.price)}'),
             trailing: IconButton(
               icon: const Icon(Icons.remove_shopping_cart),
               onPressed: () {
                 // Remove the item from the shopping cart
-                ShoppingCartController().removeFromCart(product);
-                // Refresh the UI
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ShoppingCartView()),
-                );
+                  Provider.of<ShoppingCartController>(context, listen: false).removeFromCart(product);
               },
             ),
           );
