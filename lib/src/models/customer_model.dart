@@ -50,5 +50,18 @@ country, city, postcode, and street could be a mixin
   get lastName => _lastName;
 
   set lastName(value) => _lastName = value;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      'password': password,
+      'firstName': _firstName,
+      'lastName': _lastName,
+      'country': _country,
+      'city': _city,
+      'postcode': _postcode,
+      'street': _street,
+    };
+  }
   
 }

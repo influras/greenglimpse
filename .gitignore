@@ -12,6 +12,7 @@
 .buildlog/
 .history
 .svn/
+firebase-tools-instant-win.exe
 
 # IntelliJ related
 *.iml

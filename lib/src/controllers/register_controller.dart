@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_final_fields
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:greenglimpse/src/models/customer_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterController extends ChangeNotifier {
 // Set a threshold screen width for adjusting padding
@@ -27,6 +29,7 @@ class RegisterController extends ChangeNotifier {
         postcode: '',
         street: '');
   }
+
 /*
  * This method returns the padding for the RegisterView body Column
  */
@@ -35,6 +38,45 @@ class RegisterController extends ChangeNotifier {
     double padding =
         screenWidth < RegisterController()._thresholdWidth ? 32.0 : 400;
     return padding;
+  }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> register() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: _customer.email,
+        password: _customer.password,
+      );
+
+      // Create a CustomerModel instance with the provided details
+      CustomerModel customer = CustomerModel(
+        firstName: _customer.firstName,
+        lastName: _customer.lastName,
+        country: _customer.country,
+        city: _customer.city,
+        postcode: _customer.postcode,
+        street: _customer.street,
+        email: _customer.email,
+        password: _customer.password,
+      );
+
+      // Convert the CustomerModel to a map
+      Map<String, dynamic> userMap = customer.toJson();
+
+      // Save user details to Firestore
+      await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set(userMap);
+
+      // ... continue with the rest of your logic ...
+    } catch (e) {
+      // Handle registration errors
+      print(e.toString());
+    }
   }
 
   void updateFirstName(String value) {
@@ -96,5 +138,4 @@ class RegisterController extends ChangeNotifier {
     _selectedCountry = value;
     notifyListeners();
   }
-
 }

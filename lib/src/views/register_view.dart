@@ -78,16 +78,18 @@ class RegisterBody extends StatelessWidget {
                 context.read<RegisterController>().updateLastName(value),
             decoration: const InputDecoration(labelText: 'last name '),
           ),
-          Align( alignment: Alignment.centerLeft, 
-            child: DropdownButton<String>(
-            value: context.watch<RegisterController>().selectedCountry,
-            onChanged: (value) {
-              context.read<RegisterController>().updateSelectedCountry(value!);
-            },
-            items: CountryUtil.getAllCountries(),
-            hint: const Text('Select a country'),
-            
-          )),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: DropdownButton<String>(
+                value: context.watch<RegisterController>().selectedCountry,
+                onChanged: (value) {
+                  context
+                      .read<RegisterController>()
+                      .updateSelectedCountry(value!);
+                },
+                items: CountryUtil.getAllCountries(),
+                hint: const Text('Select a country'),
+              )),
           TextField(
             onChanged: (value) =>
                 context.read<RegisterController>().updateCity(value),
@@ -125,10 +127,10 @@ class RegisterBody extends StatelessWidget {
               ])),
           ElevatedButton(
             style: ElevatedButton.styleFrom(minimumSize: const Size(140, 40)),
-            onPressed: () {
+            onPressed: () async {
               // Check if terms are accepted before proceeding
-              // ignore: dead_code
               if (context.read<RegisterController>().acceptTerms) {
+                 await context.read<RegisterController>().register();
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

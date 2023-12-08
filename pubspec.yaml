@@ -43,6 +43,9 @@ dependencies:
   country_picker: ^2.0.23
   flutter_emoji: ^2.5.1
   intl: ^0.18.1
+  firebase_core: ^2.24.1
+  firebase_auth: ^4.15.1
+  cloud_firestore: ^4.13.4
 
 dev_dependencies:
   flutter_test:
